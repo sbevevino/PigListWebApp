@@ -1,0 +1,51 @@
+# Web Framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy[asyncio]==2.0.25
+asyncpg==0.29.0
+alembic==1.13.1
+
+# Redis & Caching
+redis==5.0.1
+aioredis==2.0.1
+
+# Web Scraping
+beautifulsoup4==4.12.2
+httpx==0.26.0
+playwright==1.40.0
+price-parser==0.3.4
+lxml==4.9.3
+
+# Task Queue
+celery==5.3.4
+flower==2.0.1
+
+# Real-time (Socket.IO for FastAPI)
+python-socketio==5.10.0
+python-engineio==4.8.0
+
+# Templates
+jinja2==3.1.3
+
+# Security & Authentication
+passlib[bcrypt]==1.7.4
+python-jose[cryptography]==3.3.0
+slowapi==0.1.9
+
+# Image Processing
+Pillow==10.1.0
+
+# Utilities
+python-dotenv==1.0.0
+email-validator==2.1.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+
+# Production Server
+gunicorn==21.2.0
+
+# Monitoring (optional)
+sentry-sdk[fastapi]==1.39.2

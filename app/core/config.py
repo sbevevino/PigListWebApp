@@ -1,6 +1,7 @@
 """
 Application configuration using Pydantic Settings
 """
+
 from typing import List
 
 from pydantic_settings import BaseSettings
@@ -12,12 +13,15 @@ class Settings(BaseSettings):
     # Application
     ENVIRONMENT: str = "development"
     DEBUG: bool = True
-    SECRET_KEY: str = "change-this-secret-key-in-production"
+    APP_NAME: str = "Piglist"
+    SECRET_KEY: str = "your-secret-key-change-in-production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://piglist:piglist_dev_pass@db:5432/piglist_dev"
+    DATABASE_URL: str = (
+        "postgresql+asyncpg://piglist:piglist_dev_pass@db:5432/piglist_dev"
+    )
 
     # Redis
     REDIS_URL: str = "redis://redis:6379/0"
@@ -33,7 +37,7 @@ class Settings(BaseSettings):
     CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
 
     # Email (Optional)
-    EMAIL_HOST: str = ""
+    EMAIL_HOST: str = "smtp.gmail.com"
     EMAIL_PORT: int = 587
     EMAIL_USERNAME: str = ""
     EMAIL_PASSWORD: str = ""

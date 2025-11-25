@@ -29,8 +29,6 @@ services:
       - POSTGRES_USER=piglist
       - POSTGRES_PASSWORD=piglist_dev_pass
       - POSTGRES_DB=piglist_dev
-    ports:
-      - "5432:5432"
     networks:
       - piglist-network
     healthcheck:
@@ -44,8 +42,6 @@ services:
     restart: unless-stopped
     volumes:
       - redis-data:/data
-    ports:
-      - "6379:6379"
     networks:
       - piglist-network
     healthcheck:
@@ -81,8 +77,6 @@ services:
     environment:
       - DATABASE_URL=postgresql+asyncpg://piglist:piglist_dev_pass@db:5432/piglist_dev
       - REDIS_URL=redis://redis:6379/0
-    ports:
-      - "5555:5555"
     depends_on:
       - redis
       - celery-worker

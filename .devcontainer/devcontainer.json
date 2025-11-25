@@ -3,10 +3,10 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",
-  
   "customizations": {
     "vscode": {
       "extensions": [
+        "rooveterinaryinc.roo-cline",
         "ms-python.python",
         "ms-python.vscode-pylance",
         "ms-python.black-formatter",
@@ -20,8 +20,7 @@
         "tamasfe.even-better-toml",
         "redhat.vscode-yaml",
         "usernamehw.errorlens",
-        "eamodio.gitlens",
-        "github.copilot"
+        "eamodio.gitlens"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
@@ -47,8 +46,12 @@
       }
     }
   },
-  
-  "forwardPorts": [8000, 5432, 6379, 5555],
+  "forwardPorts": [
+    8000,
+    5432,
+    6379,
+    5555
+  ],
   "portsAttributes": {
     "8000": {
       "label": "FastAPI",
@@ -64,11 +67,8 @@
       "label": "Celery Flower"
     }
   },
-  
   "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
-  
   "remoteUser": "vscode",
-  
   "features": {
     "ghcr.io/devcontainers/features/git:1": {}
   }

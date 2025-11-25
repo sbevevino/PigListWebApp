@@ -7,6 +7,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.core.config import settings
+from app.core.logging import setup_logging, logger
+from app.middleware import RequestIDMiddleware, error_handler_middleware
+
+# Initalize logging
+setup_logging()
+logger.info("Starting Piglist API", extra={"version": "0.1.0"})
 
 # Create FastAPI app instance
 app = FastAPI(
@@ -26,6 +32,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add request ID and error handler Middleware
+app.add_middleware(RequestIDMiddleware)
+app.middleware("http")(error_handler_middleware)
 
 @app.get("/")
 async def root():
@@ -41,13 +50,24 @@ async def root():
 @app.get("/health")
 async def health_check():
     """Health check endpoint for monitoring"""
+    from app.db.base import check_db_connection
+
+    db_healthy = await check_db_connection()
+
     return JSONResponse(
-        status_code=200,
+        status_code=200 if db_healthy else 503,
         content={
-            "status": "healthy",
+            "status": "healthy" if db_healthy else "unhealthy",
             "service": "piglist-api",
+            "database": "connected" if db_healthy else "disconnected",
         },
     )
+
+@app.get("/test/error")
+async def test_error():
+    """Test error handling"""
+    from app.core.exceptions import ValidationError
+    raise ValidationError("This is a test error")
 
 
 # Include routers (to be added later)
